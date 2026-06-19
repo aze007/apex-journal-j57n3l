@@ -141,7 +141,7 @@
   </div>
 
   <footer>
-    Généré automatiquement le 19/06/2026 17:13 à partir de l'export NinjaTrader / Apex.<br>
+    Généré automatiquement le 19/06/2026 17:16 à partir de l'export NinjaTrader / Apex.<br>
     ⚠️ Analyse statistique brute — un faible nombre de jours ne permet pas de conclure sur l'edge global.
   </footer>
 </div>
@@ -269,8 +269,8 @@ function apply(){ const v=sel.value; localStorage.setItem('apexDay', v); render(
 sel.addEventListener('change', apply);
 apply();
 
-// rafraichissement auto : recharge la page toutes les 5 min (recupere la derniere version publiee)
-setInterval(()=>location.reload(), 300000);
+// rafraichissement auto anti-cache : recharge avec un parametre changeant pour forcer la derniere version
+setInterval(()=>{ location.href = location.pathname + '?t=' + Date.now(); }, 300000);
 </script>
 </body>
 </html>

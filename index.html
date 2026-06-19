@@ -141,7 +141,7 @@
   </div>
 
   <footer>
-    Généré automatiquement le 19/06/2026 15:52 à partir de l'export NinjaTrader / Apex.<br>
+    Généré automatiquement le 19/06/2026 15:53 à partir de l'export NinjaTrader / Apex.<br>
     ⚠️ Analyse statistique brute — un faible nombre de jours ne permet pas de conclure sur l'edge global.
   </footer>
 </div>
@@ -261,11 +261,16 @@ const dates=[...new Set(T.map(t=>t.d))].sort();
 const sel=document.getElementById('daySel');
 sel.innerHTML = `<option value="ALL">📊 Tous les jours (${T.length})</option>` +
   dates.map(d=>`<option value="${d}">📅 ${fmtDate(d)} (${T.filter(t=>t.d===d).length})</option>`).join('');
-const def = dates.length ? dates[dates.length-1] : 'ALL';   // par defaut : jour le plus recent
+const saved = localStorage.getItem('apexDay');
+const def = (saved && (saved==='ALL' || dates.includes(saved))) ? saved
+            : (dates.length ? dates[dates.length-1] : 'ALL');   // defaut : jour le plus recent
 sel.value = def;
-function apply(){ const v=sel.value; render(v==='ALL'? T : T.filter(t=>t.d===v)); }
+function apply(){ const v=sel.value; localStorage.setItem('apexDay', v); render(v==='ALL'? T : T.filter(t=>t.d===v)); }
 sel.addEventListener('change', apply);
 apply();
+
+// rafraichissement auto : recharge la page toutes les 5 min (recupere la derniere version publiee)
+setInterval(()=>location.reload(), 300000);
 </script>
 </body>
 </html>

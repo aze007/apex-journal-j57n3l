@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apex â€¢ Dashboard de performance</title>
+<title>Apex • Dashboard de performance</title>
 <script>/**
  * Skipped minification because the original files appears to be already minified.
  * Original file: /npm/chart.js@4.4.1/dist/chart.umd.js
@@ -89,8 +89,8 @@
     <div class="brand">
       <div class="logo">A</div>
       <div>
-        <h1>Performance Apex â€” Journal</h1>
-        <div class="sub">Compte â€¦0003 Â· MES Â· session du 22/06/2026</div>
+        <h1>Performance Apex — Journal</h1>
+        <div class="sub">Compte …0003 · MES · session du 22/06/2026</div>
       </div>
     </div>
     <div class="ctrl">
@@ -104,18 +104,18 @@
   <div class="grid">
     <div class="card">
       <h2>Courbe d'equity</h2>
-      <div class="csub">P&amp;L net cumulÃ©, trade par trade</div>
+      <div class="csub">P&amp;L net cumulé, trade par trade</div>
       <div class="chartbox h-tall"><canvas id="equity"></canvas></div>
     </div>
 
     <div class="grid row2">
       <div class="card">
         <h2>P&amp;L par trade</h2>
-        <div class="csub">Vert = gagnant Â· Rouge = perdant</div>
+        <div class="csub">Vert = gagnant · Rouge = perdant</div>
         <div class="chartbox h-mid"><canvas id="bars"></canvas></div>
       </div>
       <div class="card">
-        <h2>RÃ©partition par instrument</h2>
+        <h2>Répartition par instrument</h2>
         <div class="csub">Part du nombre de trades</div>
         <div class="chartbox h-mid"><canvas id="donut"></canvas></div>
       </div>
@@ -128,21 +128,21 @@
         <div class="chartbox h-low"><canvas id="hours"></canvas></div>
       </div>
       <div class="card">
-        <h2>RÃ©sultat net par instrument</h2>
-        <div class="csub">Ton edge rÃ©el par produit</div>
+        <h2>Résultat net par instrument</h2>
+        <div class="csub">Ton edge réel par produit</div>
         <div class="chartbox h-low"><canvas id="bysym"></canvas></div>
       </div>
     </div>
   </div>
 
   <div class="insights">
-    <h2>ðŸ” Diagnostic &amp; axes d'amÃ©lioration</h2>
+    <h2>🔍 Diagnostic &amp; axes d'amélioration</h2>
     <div class="ins-grid" id="insights"></div>
   </div>
 
   <footer>
-    GÃ©nÃ©rÃ© automatiquement le 22/06/2026 18:08 Ã  partir de l'export NinjaTrader / Apex.<br>
-    âš ï¸ Analyse statistique brute â€” un faible nombre de jours ne permet pas de conclure sur l'edge global.
+    Généré automatiquement le 22/06/2026 18:23 à partir de l'export NinjaTrader / Apex.<br>
+    ⚠️ Analyse statistique brute — un faible nombre de jours ne permet pas de conclure sur l'edge global.
   </footer>
 </div>
 
@@ -174,15 +174,15 @@ function render(data){
   const comm=data.reduce((a,t)=>a+(t.comm||0),0);
   const longPct=data.length?Math.round(100*data.filter(t=>t.side!=='S').length/data.length):0;
 
-  document.getElementById('pillCount').textContent = data.length+' trades Â· '+longPct+'% Long';
+  document.getElementById('pillCount').textContent = data.length+' trades · '+longPct+'% Long';
 
   const kpis=[
-    {lbl:'P&L net',       val:eur(net),          cls:net>=0?'pos':'neg',  hint:'rÃ©sultat de la pÃ©riode', c:'var(--green)'},
+    {lbl:'P&L net',       val:eur(net),          cls:net>=0?'pos':'neg',  hint:'résultat de la période', c:'var(--green)'},
     {lbl:'Win rate',      val:wr.toFixed(1)+'%', cls:wr>=50?'pos':'neg',  hint:wins.length+' G / '+losses.length+' P', c:'var(--blue)'},
-    {lbl:'Profit factor', val:isFinite(pf)?pf.toFixed(2):'âˆž', cls:pf>=1.5?'pos':(pf>=1?'neu':'neg'), hint:pf<1.3?'fragile (vise > 1,5)':'sain', c:'var(--gold)'},
+    {lbl:'Profit factor', val:isFinite(pf)?pf.toFixed(2):'∞', cls:pf>=1.5?'pos':(pf>=1?'neu':'neg'), hint:pf<1.3?'fragile (vise > 1,5)':'sain', c:'var(--gold)'},
     {lbl:'Ratio R:R',     val:rr.toFixed(2),     cls:rr>=1?'pos':'neg',   hint:'gain '+avgW.toFixed(0)+'$ / perte '+Math.abs(avgL).toFixed(0)+'$', c:'var(--violet)'},
-    {lbl:'Max drawdown',  val:'-'+maxdd.toFixed(2)+' $', cls:'neg',       hint:net>0?(maxdd/net).toFixed(1)+'Ã— le gain net':'â€”', c:'var(--red)'},
-    {lbl:'Commissions',   val:'-'+comm.toFixed(2)+' $',  cls:'neg',       hint:(net+comm)>0?(100*comm/(net+comm)).toFixed(0)+'% du brut':'â€”', c:'var(--red)'},
+    {lbl:'Max drawdown',  val:'-'+maxdd.toFixed(2)+' $', cls:'neg',       hint:net>0?(maxdd/net).toFixed(1)+'× le gain net':'—', c:'var(--red)'},
+    {lbl:'Commissions',   val:'-'+comm.toFixed(2)+' $',  cls:'neg',       hint:(net+comm)>0?(100*comm/(net+comm)).toFixed(0)+'% du brut':'—', c:'var(--red)'},
   ];
   document.getElementById('kpis').innerHTML = kpis.map(k=>`
     <div class="kpi"><div class="spark" style="background:${k.c}"></div>
@@ -198,15 +198,15 @@ function render(data){
       tension:.35,pointRadius:0,pointHoverRadius:6,pointHoverBackgroundColor:up?'#22d39a':'#ff5d6c',pointHoverBorderColor:'#fff',pointHoverBorderWidth:2}]},
     options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},
       plugins:{legend:{display:false},tooltip:{callbacks:{
-        title:i=>'Trade #'+data[i[0].dataIndex].id+' Â· '+data[i[0].dataIndex].sym+' Â· '+fmtDate(data[i[0].dataIndex].d)+' '+data[i[0].dataIndex].inLabel,
-        label:i=>'CumulÃ© : '+eur(i.raw)}}},
+        title:i=>'Trade #'+data[i[0].dataIndex].id+' · '+data[i[0].dataIndex].sym+' · '+fmtDate(data[i[0].dataIndex].d)+' '+data[i[0].dataIndex].inLabel,
+        label:i=>'Cumulé : '+eur(i.raw)}}},
       scales:{x:{grid:{display:false},ticks:{maxTicksLimit:12}},y:{grid,ticks:{callback:v=>v+' $'}}}}});
 
   // Bars per trade
   charts.bars=new Chart(document.getElementById('bars'),{type:'bar',data:{labels:data.map(t=>'#'+t.id),
     datasets:[{data:data.map(t=>t.profit),backgroundColor:data.map(t=>t.profit>=0?'rgba(34,211,154,.85)':'rgba(255,93,108,.85)'),borderRadius:3,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{title:i=>'#'+data[i[0].dataIndex].id+' Â· '+data[i[0].dataIndex].sym,label:i=>eur(i.raw)}}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{title:i=>'#'+data[i[0].dataIndex].id+' · '+data[i[0].dataIndex].sym,label:i=>eur(i.raw)}}},
       scales:{x:{grid:{display:false},ticks:{maxTicksLimit:14}},y:{grid,ticks:{callback:v=>v+' $'}}}}});
 
   // Donut by instrument
@@ -239,28 +239,28 @@ function render(data){
   const ins=[];
   if(data.length){
     const bestI=symNet.indexOf(Math.max(...symNet)), worstI=symNet.indexOf(Math.min(...symNet));
-    if(rr<1.2 && losses.length) ins.push({tag:'bad',t:'âš–ï¸ Ratio gain/perte faible',d:`Perte moyenne <b>${Math.abs(avgL).toFixed(0)}$</b> vs gain moyen <b>${avgW.toFixed(0)}$</b> (R:R ${rr.toFixed(2)}). Vise un R:R â‰¥ 1,5.`});
+    if(rr<1.2 && losses.length) ins.push({tag:'bad',t:'⚖️ Ratio gain/perte faible',d:`Perte moyenne <b>${Math.abs(avgL).toFixed(0)}$</b> vs gain moyen <b>${avgW.toFixed(0)}$</b> (R:R ${rr.toFixed(2)}). Vise un R:R ≥ 1,5.`});
     const worst=data.reduce((a,t)=>t.profit<a.profit?t:a,data[0]);
-    if(worst.profit<-3*Math.max(avgW,1)) ins.push({tag:'bad',t:'ðŸ›‘ Stop insuffisant',d:`Pire trade <b>${eur(worst.profit)}</b> (${worst.sym} #${worst.id}) : il efface ~${Math.round(Math.abs(worst.profit)/Math.max(avgW,1))} bons trades.`});
+    if(worst.profit<-3*Math.max(avgW,1)) ins.push({tag:'bad',t:'🛑 Stop insuffisant',d:`Pire trade <b>${eur(worst.profit)}</b> (${worst.sym} #${worst.id}) : il efface ~${Math.round(Math.abs(worst.profit)/Math.max(avgW,1))} bons trades.`});
     const h15=data.filter(t=>t.inH>=15&&t.inH<=16).length;
-    if(h15>data.length*0.4) ins.push({tag:'bad',t:'ðŸ” Surtrading concentrÃ©',d:`<b>${h15} trades</b> sur ${data.length} entre 15h et 16h. Les commissions (~${comm.toFixed(0)}$) rongent le profit.`});
-    if(worstI>=0 && symNet[worstI]<0) ins.push({tag:'bad',t:'ðŸ“‰ Produit perdant',d:`<b>${syms[worstI]}</b> te coÃ»te <b>${eur(symNet[worstI])}</b>. RÃ©duis-le tant qu'il n'est pas rentable.`});
-    if(bestI>=0 && symNet[bestI]>0) ins.push({tag:'good',t:'âœ… Ton meilleur produit',d:`<b>${syms[bestI]}</b> : <b>${eur(symNet[bestI])}</b> sur ${cnt[bestI]} trades. Concentre-toi dessus.`});
-    if(wr>=50) ins.push({tag:'good',t:'âœ… Bon taux de rÃ©ussite',d:`<b>${wr.toFixed(0)}%</b> de trades gagnants. Il reste Ã  muscler la gestion du risque.`});
-    if(net>=0) ins.push({tag:'good',t:'âœ… PÃ©riode positive',d:`Net <b>${eur(net)}</b>. Garde ce qui marche, supprime les Ã©carts de discipline.`});
+    if(h15>data.length*0.4) ins.push({tag:'bad',t:'🔁 Surtrading concentré',d:`<b>${h15} trades</b> sur ${data.length} entre 15h et 16h. Les commissions (~${comm.toFixed(0)}$) rongent le profit.`});
+    if(worstI>=0 && symNet[worstI]<0) ins.push({tag:'bad',t:'📉 Produit perdant',d:`<b>${syms[worstI]}</b> te coûte <b>${eur(symNet[worstI])}</b>. Réduis-le tant qu'il n'est pas rentable.`});
+    if(bestI>=0 && symNet[bestI]>0) ins.push({tag:'good',t:'✅ Ton meilleur produit',d:`<b>${syms[bestI]}</b> : <b>${eur(symNet[bestI])}</b> sur ${cnt[bestI]} trades. Concentre-toi dessus.`});
+    if(wr>=50) ins.push({tag:'good',t:'✅ Bon taux de réussite',d:`<b>${wr.toFixed(0)}%</b> de trades gagnants. Il reste à muscler la gestion du risque.`});
+    if(net>=0) ins.push({tag:'good',t:'✅ Période positive',d:`Net <b>${eur(net)}</b>. Garde ce qui marche, supprime les écarts de discipline.`});
   } else {
-    ins.push({tag:'good',t:'Aucun trade',d:'Pas de trade pour cette sÃ©lection.'});
+    ins.push({tag:'good',t:'Aucun trade',d:'Pas de trade pour cette sélection.'});
   }
   document.getElementById('insights').innerHTML = ins.map(i=>`
-    <div class="ins"><div class="t"><span class="tag ${i.tag}">${i.tag==='bad'?'Ã€ CORRIGER':'POINT FORT'}</span>${i.t}</div>
+    <div class="ins"><div class="t"><span class="tag ${i.tag}">${i.tag==='bad'?'À CORRIGER':'POINT FORT'}</span>${i.t}</div>
       <div class="d">${i.d}</div></div>`).join('');
 }
 
 // ----- Selecteur de jour -----
 const dates=[...new Set(T.map(t=>t.d))].sort();
 const sel=document.getElementById('daySel');
-sel.innerHTML = `<option value="ALL">ðŸ“Š Tous les jours (${T.length})</option>` +
-  dates.map(d=>`<option value="${d}">ðŸ“… ${fmtDate(d)} (${T.filter(t=>t.d===d).length})</option>`).join('');
+sel.innerHTML = `<option value="ALL">📊 Tous les jours (${T.length})</option>` +
+  dates.map(d=>`<option value="${d}">📅 ${fmtDate(d)} (${T.filter(t=>t.d===d).length})</option>`).join('');
 const saved = localStorage.getItem('apexDay');
 const def = (saved && (saved==='ALL' || dates.includes(saved))) ? saved
             : (dates.length ? dates[dates.length-1] : 'ALL');   // defaut : jour le plus recent
